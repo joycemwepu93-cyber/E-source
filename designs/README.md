@@ -1,29 +1,43 @@
 # Direction artistique — E-SOURCE
 
-## Identité visuelle retenue
+## Nouvelle proposition : accueil clair et chaleureux
 
-La boutique E-SOURCE adopte une identité mixte, adaptée aux collections homme, femme et enfant.
+La nouvelle page d'accueil combine une présentation lumineuse des produits avec une identité de marque reconnaissable. Le blanc devient le fond principal afin de mettre en valeur les photos de vêtements et accessoires fournies comme références.
 
-- **Bleu nuit** : couleur principale, pour une image élégante et fiable.
-- **Blanc** : fonds et espaces de respiration pour faciliter la lecture.
-- **Or** : accents visuels, boutons importants et détails premium.
+### Identité visuelle
+- **Bleu nuit** : navigation, bandeau de services, titres et éléments de confiance.
+- **Blanc** : fond principal et arrière-plan des fiches produits.
+- **Or doux** : boutons, icônes, séparateurs et accents.
+- **Beige clair** : touches chaleureuses dans les zones promotionnelles.
 
-## Principes d'interface
+### Structure de la page d'accueil
+1. Bandeau supérieur : livraison en RDC, paiement sécurisé et contact client.
+2. En-tête : logo E-SOURCE, recherche, favoris et panier.
+3. Navigation : Accueil, Femmes, Hommes, Enfants, Chaussures et Accessoires.
+4. Bannière principale : « Nouvelle Collection — Style & Élégance » avec un bouton « Acheter maintenant ».
+5. Raccourcis catégories illustrés.
+6. Section « Nos produits phares » avec cartes blanches, photos de produits, noms, prix indicatifs et bouton d'ajout au panier.
+7. Bandeau de réassurance : livraison rapide, paiement sécurisé, assistance client et retours faciles.
 
-- Navigation simple et lisible.
-- Mise en avant des catégories et des nouveautés.
-- Cartes produits sobres avec prix et appel à l'action visibles.
-- Interface responsive pour ordinateur et mobile.
-- Contrastes suffisants et typographie facile à lire.
+### Références produits
+Les visuels fournis servent de références pour présenter notamment :
+- Jeans larges en denim.
+- Sacs à main et sacs demi-lune.
+- Foulards en soie et turbans.
+- Sandales et chaussures.
+- Accessoires de mode.
 
-## Écrans à concevoir
+### Règles pour les images produits
+- Préférer un fond blanc uniforme pour chaque photo produit.
+- Centrer l'article et conserver ses proportions.
+- Utiliser une ombre légère et naturelle, sans décor distrayant.
+- Garder un cadrage et une qualité cohérents sur tout le catalogue.
 
-1. Accueil et présentation de la boutique.
-2. Catalogue avec catégories et filtres.
-3. Fiche produit.
-4. Panier et commande.
-5. Espace d'administration.
+### Notes de réalisation
+- Les prix affichés dans une maquette sont des exemples visuels, pas des tarifs réels.
+- Les promesses de livraison, de paiement et de retour devront être confirmées avant publication.
+- Prévoir une mise en page responsive pour ordinateur, tablette et mobile.
+- Cette proposition décrit la direction de la page d'accueil ; elle ne signifie pas que ces fonctions sont déjà développées.
 
-## Référence
-
-La version retenue est la proposition bleu nuit, blanc et or validée dans la conversation du projet. La maquette JPEG complète reste à ajouter dans ce dossier sous le nom `E-SOURCE-maquettes-bleu-nuit-or.jpeg`.
+## Maquette visuelle
+Le fichier JPEG de la nouvelle proposition doit être placé dans ce dossier sous le nom `E-SOURCE-accueil-proposition.jpg`.
