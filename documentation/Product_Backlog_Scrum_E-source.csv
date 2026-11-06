@@ -1,0 +1,23 @@
+ID;User Story;Priorité;Story Points;Sprint prévu;Responsable;Statut;Critères d'acceptation / Notes
+US01;En tant que visiteur, je veux consulter la page d'accueil afin de découvrir la Boutique La Source.;Haute;3;;;À faire;
+US02;En tant que client, je veux consulter le catalogue afin de découvrir les produits disponibles.;Haute;5;;;À faire;
+US03;En tant que client, je veux parcourir les catégories afin de trouver rapidement un type de produit.;Haute;3;;;À faire;
+US04;En tant que client, je veux consulter la fiche d'un produit afin de connaître ses détails et son prix.;Haute;3;;;À faire;
+US05;En tant que visiteur, je veux créer un compte afin de devenir client de la boutique.;Haute;5;;;À faire;
+US06;En tant que client, je veux me connecter afin d'accéder à mon espace personnel.;Haute;3;;;À faire;
+US07;En tant que client, je veux modifier mon profil afin de maintenir mes informations à jour.;Moyenne;3;;;À faire;
+US08;En tant que client, je veux ajouter un produit au panier afin de préparer ma commande.;Haute;5;;;À faire;
+US09;En tant que client, je veux modifier les quantités du panier afin d'ajuster ma commande.;Haute;3;;;À faire;
+US10;En tant que client, je veux retirer un produit du panier afin de corriger ma sélection.;Moyenne;2;;;À faire;
+US11;En tant que client, je veux valider ma commande afin de confirmer mon achat.;Haute;5;;;À faire;
+US12;En tant que boutique, je veux distinguer les nouveaux clients des clients connus afin d'appliquer les conditions de paiement adaptées.;Haute;5;;;Nouveaux clients : paiement immédiat. Clients connus : possibilité de délai de paiement.
+US13;En tant que client, je veux payer en espèces ou par Mobile Money afin de régler ma commande.;Haute;5;;;À faire;
+US14;En tant que client, je veux suivre l'état de ma commande afin de connaître son avancement.;Moyenne;3;;;À faire;
+US15;En tant qu'administrateur, je veux ajouter un produit afin d'actualiser le catalogue.;Haute;5;;;À faire;
+US16;En tant qu'administrateur, je veux modifier un produit afin de corriger ses informations.;Haute;3;;;À faire;
+US17;En tant qu'administrateur, je veux supprimer un produit afin de retirer les articles indisponibles.;Moyenne;2;;;À faire;
+US18;En tant qu'administrateur, je veux gérer les catégories afin d'organiser le catalogue.;Moyenne;3;;;À faire;
+US19;En tant qu'administrateur, je veux consulter les commandes afin de traiter les achats des clients.;Haute;5;;;À faire;
+US20;En tant qu'administrateur, je veux gérer les informations de la boutique afin de maintenir les coordonnées à jour.;Moyenne;2;;;À faire;
+US21;En tant qu'équipe projet, nous voulons effectuer des tests fonctionnels afin de vérifier le bon fonctionnement de l'application.;Haute;5;;;À faire;
+US22;En tant qu'équipe projet, nous voulons déployer l'application afin de la rendre accessible.;Haute;3;;;À faire;
