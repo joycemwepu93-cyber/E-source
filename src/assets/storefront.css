@@ -1,0 +1,23 @@
+/* Composants fonctionnels additionnels — le style principal du site reste inchangé. */
+.header-actions{display:flex;align-items:center;gap:10px}
+.app-dialog{width:min(560px,calc(100% - 28px));max-height:85vh;padding:0;border:1px solid var(--line);border-radius:4px;background:#fbfaf7;color:var(--ink);box-shadow:0 18px 70px #0003}
+.app-dialog::backdrop{background:#20232199}
+.dialog-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+.dialog-head h2{font-family:Manrope,sans-serif;margin:0;font-size:23px}
+.dialog-close{border:0;background:transparent;font-size:27px;cursor:pointer;color:var(--ink)}
+.dialog-body{padding:22px 24px;overflow:auto}
+.dialog-body label{display:block;margin:0 0 14px;font-size:12px;color:#555}
+.dialog-body input:not([type=checkbox]),.dialog-body select,.dialog-body textarea{display:block;width:100%;margin-top:6px;padding:11px;border:1px solid var(--line);background:white;color:var(--ink);font:inherit;font-size:13px}
+.dialog-submit{border:0;cursor:pointer;margin-top:6px}
+.dialog-submit:disabled{opacity:.5;cursor:not-allowed}
+.account-tabs{display:flex;gap:8px;margin-bottom:18px}
+.account-tab{border:1px solid var(--line);background:transparent;padding:9px 14px;font-size:12px;cursor:pointer}
+.account-tab.active{background:var(--ink);color:white;border-color:var(--ink)}
+.dialog-status{font-size:12px;color:var(--accent);margin-top:14px;line-height:1.6}
+.cart-line,.admin-order{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}
+.cart-line small,.admin-order small{display:block;color:var(--muted);margin-top:5px}
+.remove-cart{display:block;margin-top:6px;padding:0;border:0;background:none;color:var(--accent);font-size:11px;cursor:pointer}
+.cart-summary{padding:16px 0;font-weight:700;font-size:15px}
+.check-label{display:flex!important;align-items:center;gap:8px}
+.no-product-image{height:100%;display:grid;place-items:center;color:var(--accent);font-family:Manrope,sans-serif;font-weight:800;letter-spacing:2px}
+@media(max-width:650px){.header-actions{margin-left:auto}.dialog-body{padding:18px}.dialog-head{padding:17px 18px}}
