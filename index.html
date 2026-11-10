@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">\n  <link rel="stylesheet" href="src/assets/storefront.css">
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -18,7 +18,7 @@
     <nav class="main-nav" aria-label="Navigation principale">
       <a href="#catalogue">Catalogue</a><a href="#catalogue" data-nav-category="Hommes">Hommes</a><a href="#catalogue" data-nav-category="Femmes">Femmes</a><a href="#catalogue" data-nav-category="Enfants">Enfants</a>
     </nav>
-    <button class="cart-button" id="cartButton" aria-label="Panier">Panier <span id="cartCount">0</span></button>
+    <div class="header-actions"><button class="cart-button" id="accountButton" type="button">Mon compte</button><button class="cart-button" id="cartButton" aria-label="Panier" type="button">Panier <span id="cartCount">0</span></button></div>
   </header>
 
   <main>
@@ -49,6 +49,9 @@
     </section>
   </main>
 
+  <dialog class="app-dialog" id="accountDialog"><div class="dialog-head"><h2 id="accountTitle">Mon compte</h2><button class="dialog-close" type="button" data-close aria-label="Fermer">×</button></div><div class="dialog-body"><div class="account-tabs"><button type="button" class="account-tab active" data-account-mode="login">Connexion</button><button type="button" class="account-tab" data-account-mode="register">Créer un compte</button></div><form id="accountForm"><div id="registerFields" hidden><label>Prénom<input name="first_name" autocomplete="given-name"></label><label>Nom<input name="last_name" autocomplete="family-name"></label><label>Téléphone<input name="phone" autocomplete="tel"></label></div><label>Adresse e-mail<input name="email" type="email" required autocomplete="email"></label><label>Mot de passe<input name="password" type="password" required minlength="10" autocomplete="current-password"></label><button class="primary-button dialog-submit" type="submit">Continuer <span>→</span></button></form><div id="accountStatus" class="dialog-status" aria-live="polite"></div><div id="accountProfile" hidden></div></div></dialog>
+  <dialog class="app-dialog" id="cartDialog"><div class="dialog-head"><h2>Votre panier</h2><button class="dialog-close" type="button" data-close aria-label="Fermer">×</button></div><div class="dialog-body"><div id="cartItems"></div><div class="cart-summary" id="cartSummary"></div><label>Mode de paiement<select id="paymentMethod"><option value="cash">Espèces à la livraison / au retrait</option><option value="mobile_money">Mobile Money (confirmation manuelle)</option><option value="credit">Crédit client autorisé</option></select></label><label>Note de commande<textarea id="orderNote" rows="2"></textarea></label><button class="primary-button dialog-submit" id="checkoutButton" type="button">Passer la commande <span>→</span></button><div id="cartStatus" class="dialog-status" aria-live="polite"></div></div></dialog>
+  <dialog class="app-dialog" id="adminDialog"><div class="dialog-head"><h2>Administration</h2><button class="dialog-close" type="button" data-close aria-label="Fermer">×</button></div><div class="dialog-body"><h3>Ajouter un produit</h3><form id="adminProductForm"><label>Nom<input name="name" required></label><label>Catégorie<select name="category_id" id="adminCategory" required></select></label><label>Description<textarea name="description" rows="2"></textarea></label><label>Prix (USD)<input name="price" type="number" min="0" step="0.01" required></label><label>Stock<input name="stock_quantity" type="number" min="0" required></label><label>URL de l'image<input name="image_url" type="url"></label><label class="check-label"><input name="is_active" type="checkbox" checked> Produit visible</label><button class="primary-button dialog-submit" type="submit">Enregistrer le produit <span>→</span></button></form><div id="adminStatus" class="dialog-status" aria-live="polite"></div><h3>Commandes récentes</h3><div id="adminOrders"></div></div></dialog>
   <footer><a class="brand footer-brand" href="#">E<span>-</span>SOURCE</a><p>La mode pour toute la famille.</p><small>© <span id="year"></span> Boutique La Source. Tous droits réservés.</small></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
