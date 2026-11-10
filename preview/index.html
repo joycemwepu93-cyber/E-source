@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="E-SOURCE — aperçu de la boutique en ligne.">
+<title>E-SOURCE | Boutique La Source</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">BIENVENUE CHEZ E-SOURCE — LIVRAISON ET MODE POUR TOUTE LA FAMILLE</div>
+<header class="site-header"><a class="brand" href="#">E<span>-</span>SOURCE</a><nav class="main-nav"><a href="#catalogue">Catalogue</a><a href="#catalogue" data-filter="Hommes">Hommes</a><a href="#catalogue" data-filter="Femmes">Femmes</a><a href="#catalogue" data-filter="Enfants">Enfants</a></nav><div class="header-actions"><button class="cart-button" id="login">Mon compte</button><button class="cart-button" id="cart">Panier <span id="count">0</span></button></div></header>
+<main>
+<section class="intro"><div><p class="eyebrow">BOUTIQUE LA SOURCE</p><h1>Le style qui vous<br><span>ressemble.</span></h1><p class="intro-copy">Découvrez notre sélection de vêtements, chaussures et accessoires pour tous les jours et toutes les occasions.</p><a class="primary-button" href="#catalogue">Découvrir le catalogue <span>→</span></a></div><div class="intro-note"><span class="note-line"></span><p>Du style. Du choix.<br>Pour toute la famille.</p></div></section>
+<section class="trust"><div><b>✦</b><span>Mode pour tous</span></div><div><b>◇</b><span>Commande simple</span></div><div><b>♡</b><span>Service client</span></div><div><b>↗</b><span>Livraison à confirmer</span></div></section>
+<section class="catalogue-section" id="catalogue"><div class="section-heading"><div><p class="eyebrow">NOTRE SÉLECTION</p><h2>Le catalogue</h2></div><p class="product-total" id="total">12 articles de démonstration</p></div><div class="catalogue-tools"><div class="filters"><button class="filter active" data-filter="Tout">Tout</button><button class="filter" data-filter="Hommes">Hommes</button><button class="filter" data-filter="Femmes">Femmes</button><button class="filter" data-filter="Enfants">Enfants</button><button class="filter" data-filter="Chaussures">Chaussures</button><button class="filter" data-filter="Accessoires">Accessoires</button></div><label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Rechercher un article..."></label></div><div class="product-grid" id="products"></div></section>
+<section class="newsletter"><p class="eyebrow">RESTONS EN CONTACT</p><h2>Le bon style, au bon moment.</h2><p>Découvrez les nouveautés et les prochaines collections E-SOURCE.</p><button class="primary-button" id="newsletter">Être informé(e) <span>→</span></button></section>
+</main>
+<footer><a class="brand footer-brand" href="#">E<span>-</span>SOURCE</a><p>La mode pour toute la famille.</p><small>© <span id="year"></span> Boutique La Source. Aperçu de démonstration.</small></footer>
+<div class="toast" id="toast" role="status"></div>
+<dialog id="modal"><div class="dialog-head"><h2 id="modalTitle">Mon compte</h2><button id="close" class="dialog-close">×</button></div><div class="dialog-body" id="modalBody"></div></dialog>
+<script src="app.js"></script>
+</body></html>
