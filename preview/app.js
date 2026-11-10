@@ -1,0 +1,22 @@
+const items=[
+{name:"Jean denim coupe droite",category:"Hommes",price:32,image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=85"},
+{name:"Sac à main demi-lune",category:"Femmes",price:28,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85"},
+{name:"Sneakers urbaines",category:"Chaussures",price:45,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"},
+{name:"Robe élégante",category:"Femmes",price:38,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=85"},
+{name:"T-shirt essentiel",category:"Hommes",price:18,image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"},
+{name:"Lunettes de soleil",category:"Accessoires",price:16,image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=85"},
+{name:"Tenue enfant",category:"Enfants",price:24,image:"https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=85"},
+{name:"Sandales minimalistes",category:"Chaussures",price:27,image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=85"},
+{name:"Sac bandoulière",category:"Femmes",price:34,image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=800&q=85"},
+{name:"Chemise casual",category:"Hommes",price:29,image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=85"},
+{name:"Chaussures enfant",category:"Enfants",price:22,image:"https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=800&q=85"},
+{name:"Montre classique",category:"Accessoires",price:41,image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85"}];
+let filter="Tout",cart=[];const $=s=>document.querySelector(s),fmt=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(n);
+function render(){let q=$("#search").value.toLowerCase();let data=items.filter(x=>(filter==="Tout"||x.category===filter)&&x.name.toLowerCase().includes(q));$("#total").textContent=data.length+" article(s)";$("#products").innerHTML=data.map((p,i)=>'<article class="product-card"><div class="product-image"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"><span class="product-tag">'+p.category+'</span></div><div class="product-info"><p class="product-category">Collection E-SOURCE</p><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="product-price">'+fmt(p.price)+'</span><button class="add-button" data-add="'+items.indexOf(p)+'">+ Ajouter</button></div></div></article>').join("")||'<p class="empty-state">Aucun produit trouvé.</p>';}
+function toast(t){let el=$("#toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2400)}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===filter));render()}));$("#search").addEventListener("input",render);
+$("#products").addEventListener("click",e=>{let b=e.target.closest("[data-add]");if(!b)return;cart.push(items[Number(b.dataset.add)]);$("#count").textContent=cart.length;toast("Article ajouté au panier.");});
+$("#cart").addEventListener("click",()=>{let sum=cart.reduce((a,p)=>a+p.price,0);$("#modalTitle").textContent="Votre panier";$("#modalBody").innerHTML=cart.length?cart.map(p=>'<p>'+p.name+' — '+fmt(p.price)+'</p>').join("")+'<hr><strong>Total : '+fmt(sum)+'</strong><p class="demo-note">Aperçu uniquement : les commandes ne sont pas enregistrées.</p>':'<p>Votre panier est vide pour le moment.</p>';$("#modal").showModal()});
+$("#login").addEventListener("click",()=>{$("#modalTitle").textContent="Espace client";$("#modalBody").innerHTML='<p>La connexion, la création de compte et le suivi des commandes seront disponibles sur la version reliée au serveur.</p><p class="demo-note">Ceci est un aperçu visuel avec des produits fictifs.</p>';$("#modal").showModal()});
+$("#newsletter").addEventListener("click",()=>toast("Merci ! La newsletter sera activée lors de la mise en service."));
+$("#close").addEventListener("click",()=>$("#modal").close());$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")$("#modal").close()});$("#year").textContent=new Date().getFullYear();render();
