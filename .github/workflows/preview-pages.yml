@@ -1,7 +1,7 @@
 name: Deploy E-SOURCE visual preview
 on:
   push:
-    branches: [feat/storefront-php-mysql-integration]
+    branches: [main, preview/live-site]
     paths: ['preview/**', '.github/workflows/preview-pages.yml']
   workflow_dispatch:
 permissions:
