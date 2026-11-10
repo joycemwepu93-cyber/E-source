@@ -18,7 +18,7 @@
     <nav class="main-nav" aria-label="Navigation principale">
       <a href="#catalogue">Catalogue</a><a href="#catalogue" data-nav-category="Hommes">Hommes</a><a href="#catalogue" data-nav-category="Femmes">Femmes</a><a href="#catalogue" data-nav-category="Enfants">Enfants</a>
     </nav>
-    <button class="cart-button" id="cartButton" aria-label="Panier">Panier <span id="cartCount">0</span></button>
+    <div class="header-actions"><button class="account-button" id="accountButton" type="button">Mon compte</button><button class="cart-button" id="cartButton" aria-label="Panier">Panier <span id="cartCount">0</span></button></div>
   </header>
 
   <main>
@@ -50,6 +50,15 @@
   </main>
 
   <footer><a class="brand footer-brand" href="#">E<span>-</span>SOURCE</a><p>La mode pour toute la famille.</p><small>© <span id="year"></span> Boutique La Source. Tous droits réservés.</small></footer>
+  <section class="app-panel" id="accountPanel" hidden aria-labelledby="accountTitle">
+    <div class="panel-card"><button class="panel-close" data-close-panel aria-label="Fermer">×</button><p class="eyebrow">ESPACE CLIENT</p><h2 id="accountTitle">Mon compte</h2><div id="accountContent"></div></div>
+  </section>
+  <section class="app-panel" id="cartPanel" hidden aria-labelledby="cartTitle">
+    <div class="panel-card"><button class="panel-close" data-close-panel aria-label="Fermer">×</button><p class="eyebrow">VOTRE SÉLECTION</p><h2 id="cartTitle">Mon panier</h2><div id="cartContent"></div></div>
+  </section>
+  <section class="app-panel" id="adminPanel" hidden aria-labelledby="adminTitle">
+    <div class="panel-card panel-card-wide"><button class="panel-close" data-close-panel aria-label="Fermer">×</button><p class="eyebrow">GESTION DE LA BOUTIQUE</p><h2 id="adminTitle">Administration</h2><div id="adminContent"></div></div>
+  </section>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
