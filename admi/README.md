@@ -25,12 +25,17 @@ Ce dossier est l'espace de travail réservé aux prochains développements de l'
 4. Copier `src/config/config.example.php` vers `src/config/config.php`, puis configurer les identifiants MySQL locaux.
 5. Tester : `http://localhost/E-source/src/api/index.php?action=health`.
 
-### Périmètre administrateur à développer
-- Tableau de bord et indicateurs.
+### Première interface disponible
+- Ouvrir `http://localhost/E-source/admi/` pour accéder à l'administration.
+- Se connecter avec un compte dont le rôle est `admin` dans la table `users`.
+- Tableau de bord avec indicateurs calculés depuis les produits, commandes et clients.
 - Gestion des produits, catégories et stocks.
-- Gestion des commandes et de leurs statuts.
-- Gestion des clients et des autorisations de crédit.
-- Suivi des paiements.
+- Consultation des commandes et mise à jour de leur statut.
+- Gestion des clients, de leur activation et de l'autorisation de crédit.
+
+### Évolutions restantes
+- Écran et historique détaillé des paiements : l'API ne fournit pas encore de route `admin/payments`.
+- Journal d'audit, graphiques de ventes et filtres avancés.
 
 ### Sécurité
 - Ne jamais commiter `src/config/config.php`, les mots de passe ou les secrets.
