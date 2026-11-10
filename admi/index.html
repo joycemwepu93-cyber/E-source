@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="E-SOURCE — espace d'administration">
+  <title>Administration | E-SOURCE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <section id="loginView" class="login-screen">
+    <div class="login-card">
+      <a class="brand" href="../index.html">E<span>-</span>SOURCE</a>
+      <p class="eyebrow">ESPACE SÉCURISÉ</p>
+      <h1>Administration</h1>
+      <p class="muted">Connectez-vous avec votre compte administrateur.</p>
+      <form id="loginForm">
+        <label>Adresse e-mail<input type="email" name="email" autocomplete="username" required></label>
+        <label>Mot de passe<input type="password" name="password" autocomplete="current-password" required></label>
+        <button class="button primary full" type="submit">Se connecter</button>
+        <p id="loginError" class="form-error" role="alert"></p>
+      </form>
+      <a class="back-link" href="../index.html">← Retour à la boutique</a>
+    </div>
+  </section>
+
+  <div id="appView" class="app-shell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand sidebar-brand" href="index.html">E<span>-</span>SOURCE</a>
+      <p class="sidebar-caption">GESTION DE LA BOUTIQUE</p>
+      <nav class="side-nav" aria-label="Navigation administration">
+        <button class="nav-item active" data-page="dashboard"><span>▦</span> Tableau de bord</button>
+        <button class="nav-item" data-page="products"><span>◇</span> Produits & stocks</button>
+        <button class="nav-item" data-page="orders"><span>▤</span> Commandes</button>
+        <button class="nav-item" data-page="customers"><span>♙</span> Clients</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Serveur local</div>
+    </aside>
+
+    <main class="main-area">
+      <header class="top-header">
+        <button id="menuToggle" class="icon-button mobile-menu" aria-label="Ouvrir le menu">☰</button>
+        <div><p class="eyebrow">BOUTIQUE LA SOURCE</p><h2 id="pageTitle">Tableau de bord</h2></div>
+        <div class="user-area"><div class="avatar">A</div><div><strong id="adminName">Administrateur</strong><small>Compte admin</small></div><button id="logoutButton" class="logout-button">Déconnexion</button></div>
+      </header>
+
+      <div class="content">
+        <section class="page-section active" id="page-dashboard">
+          <div class="welcome-row"><div><p class="eyebrow">VUE D'ENSEMBLE</p><h1>Bonjour, bienvenue 👋</h1><p class="muted">Voici l'activité actuelle de votre boutique.</p></div><button class="button outline" id="refreshDashboard">↻ Actualiser</button></div>
+          <div class="stats-grid">
+            <article class="stat-card"><span class="stat-icon">◇</span><p>Produits</p><strong id="statProducts">—</strong><small>Références enregistrées</small></article>
+            <article class="stat-card"><span class="stat-icon">▤</span><p>Commandes</p><strong id="statOrders">—</strong><small>Toutes les commandes</small></article>
+            <article class="stat-card"><span class="stat-icon">♙</span><p>Clients</p><strong id="statCustomers">—</strong><small>Comptes clients</small></article>
+            <article class="stat-card"><span class="stat-icon gold">▣</span><p>À traiter</p><strong id="statPending">—</strong><small>Commandes en attente</small></article>
+          </div>
+          <article class="panel"><div class="panel-heading"><div><p class="eyebrow">SUIVI RÉCENT</p><h3>Dernières commandes</h3></div><button class="text-button" data-go="orders">Voir toutes les commandes →</button></div><div class="table-wrap"><table><thead><tr><th>Commande</th><th>Client</th><th>Date</th><th>Montant</th><th>Statut</th></tr></thead><tbody id="recentOrders"><tr><td colspan="5" class="empty">Chargement…</td></tr></tbody></table></div></article>
+        </section>
+
+        <section class="page-section" id="page-products">
+          <div class="section-toolbar"><div><p class="eyebrow">CATALOGUE</p><h1>Produits & stocks</h1><p class="muted">Ajoutez, modifiez et désactivez les articles de la boutique.</p></div><button class="button primary" id="addProductButton">＋ Ajouter un produit</button></div>
+          <div class="panel"><div class="panel-heading"><h3>Catalogue des produits</h3><input id="productSearch" class="search-input" type="search" placeholder="Rechercher un produit…"></div><div class="table-wrap"><table><thead><tr><th>Produit</th><th>Catégorie</th><th>Prix</th><th>Stock</th><th>Visibilité</th><th>Actions</th></tr></thead><tbody id="productsTable"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody></table></div></div>
+          <div class="panel category-panel"><div class="panel-heading"><div><h3>Catégories</h3><p class="muted">Ajouter une catégorie au catalogue.</p></div></div><form id="categoryForm" class="inline-form"><input name="name" placeholder="Nom de la catégorie" required maxlength="100"><button class="button outline" type="submit">Ajouter</button></form></div>
+        </section>
+
+        <section class="page-section" id="page-orders">
+          <div class="section-toolbar"><div><p class="eyebrow">VENTES</p><h1>Commandes</h1><p class="muted">Consultez les commandes et mettez à jour leur statut.</p></div><button class="button outline" id="refreshOrders">↻ Actualiser</button></div>
+          <div class="panel"><div class="table-wrap"><table><thead><tr><th>Référence</th><th>Client</th><th>Date</th><th>Paiement</th><th>Total</th><th>Statut</th><th>Modifier</th></tr></thead><tbody id="ordersTable"><tr><td colspan="7" class="empty">Chargement…</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="page-section" id="page-customers">
+          <div class="section-toolbar"><div><p class="eyebrow">RELATION CLIENT</p><h1>Clients</h1><p class="muted">Gérez l'accès des clients et leur éligibilité au paiement à crédit.</p></div><button class="button outline" id="refreshCustomers">↻ Actualiser</button></div>
+          <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>E-mail</th><th>Téléphone</th><th>Crédit autorisé</th><th>Compte</th><th>Actions</th></tr></thead><tbody id="customersTable"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody></table></div></div>
+        </section>
+        <p id="globalMessage" class="global-message" role="status"></p>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="productDialog" class="modal">
+    <form id="productForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">CATALOGUE</p><h2 id="productDialogTitle">Ajouter un produit</h2></div><button type="button" class="icon-button" id="closeProductDialog" aria-label="Fermer">×</button></div>
+      <input type="hidden" name="id">
+      <label>Nom du produit<input name="name" required maxlength="180"></label>
+      <label>Description<textarea name="description" rows="3"></textarea></label>
+      <div class="form-grid"><label>Catégorie<select name="category_id" id="productCategory"><option value="">Sans catégorie</option></select></label><label>Prix<input name="price" type="number" min="0" step="0.01" required></label></div>
+      <div class="form-grid"><label>Devise<select name="currency"><option value="USD">USD</option><option value="CDF">CDF</option></select></label><label>Quantité en stock<input name="stock_quantity" type="number" min="0" step="1" required value="0"></label></div>
+      <label>Adresse de l'image (URL)<input name="image_url" type="url" placeholder="https://…"></label>
+      <label class="check-label"><input name="is_active" type="checkbox" checked> Produit visible dans la boutique</label>
+      <p id="productFormError" class="form-error" role="alert"></p>
+      <div class="modal-actions"><button type="button" class="button outline" id="cancelProduct">Annuler</button><button type="submit" class="button primary">Enregistrer</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
