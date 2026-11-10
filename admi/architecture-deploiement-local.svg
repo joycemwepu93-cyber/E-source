@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050" role="img" aria-labelledby="title desc">
+<title id="title">E-SOURCE — Architecture de déploiement local</title>
+<desc id="desc">Architecture locale : navigateur administrateur, Apache, frontend et API PHP, base MySQL, outils XAMPP et espace de travail GitHub dans le dossier admi.</desc>
+<defs>
+ <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071b3b"/><stop offset="1" stop-color="#173d72"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f7d36b"/><stop offset="1" stop-color="#fff0b0"/></linearGradient>
+ <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#09234a" flood-opacity=".14"/></filter>
+ <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#183e70"/></marker>
+ <style>
+  text{font-family:Arial,Helvetica,sans-serif;fill:#10264a}.head{fill:#fff;font-weight:700}.sub{fill:#f8d66f}.h{font-size:29px;font-weight:700}.p{font-size:22px}.small{font-size:18px}.muted{fill:#51627b}.panel{fill:#fff;stroke:#c8d4e6;stroke-width:2}.node{fill:#f7f9fd;stroke:#244d83;stroke-width:3}.line{stroke:#183e70;stroke-width:5;fill:none;marker-end:url(#arrow)}
+ </style>
+</defs>
+<rect width="1600" height="1050" fill="#f2f5fa"/>
+<rect width="1600" height="145" fill="url(#navy)"/>
+<path d="M0 136H1600V151H0Z" fill="#d7a938"/>
+<text x="65" y="66" class="head" font-size="48">E-SOURCE</text><text x="68" y="105" class="sub" font-size="23">BOUTIQUE EN LIGNE</text>
+<path d="M420 30V115" stroke="#e7c45d" stroke-width="3"/>
+<text x="470" y="65" class="head" font-size="38">Architecture de déploiement local</text>
+<text x="472" y="105" class="sub" font-size="23">Environnement de développement — Admin</text>
+<rect x="1170" y="43" width="360" height="55" rx="27" fill="url(#gold)"/><text x="1350" y="78" text-anchor="middle" font-size="21" font-weight="700">BRANCHE GITHUB : main</text>
+
+<!-- main flow -->
+<rect x="410" y="180" width="780" height="118" rx="20" class="node" filter="url(#shadow)"/>
+<circle cx="485" cy="239" r="34" fill="#e6eefb"/><text x="485" y="247" text-anchor="middle" font-size="34">⌘</text>
+<text x="545" y="225" class="h">1. Navigateur — Administrateur</text><text x="545" y="263" class="p">Google Chrome • http://localhost/E-source/</text>
+<path d="M800 300V345" class="line"/>
+<rect x="410" y="355" width="780" height="115" rx="20" class="node" filter="url(#shadow)"/>
+<circle cx="485" cy="412" r="34" fill="#fff1d0"/><text x="485" y="423" text-anchor="middle" font-size="32">🌐</text>
+<text x="545" y="400" class="h">2. Apache — Serveur Web</text><text x="545" y="438" class="p">XAMPP • Port 80 • sert les pages du site</text>
+<path d="M800 472V517" class="line"/>
+<rect x="410" y="527" width="780" height="150" rx="20" class="node" filter="url(#shadow)"/>
+<circle cx="485" cy="602" r="34" fill="#e5eafa"/><text x="485" y="612" text-anchor="middle" font-size="27" font-weight="700">PHP</text>
+<text x="545" y="570" class="h">3. Application E-SOURCE</text><text x="545" y="608" class="p">Frontend : HTML • CSS • JavaScript</text><text x="545" y="642" class="p">Backend : src/api/index.php • API JSON</text>
+<path d="M800 680V725" class="line"/>
+<rect x="410" y="735" width="780" height="125" rx="20" class="node" filter="url(#shadow)"/>
+<circle cx="485" cy="797" r="34" fill="#e4f2ee"/><text x="485" y="807" text-anchor="middle" font-size="26" font-weight="700">DB</text>
+<text x="545" y="785" class="h">4. MySQL / MariaDB</text><text x="545" y="823" class="p">Base : e_source • utilisateurs • produits • commandes • paiements</text>
+
+<!-- tools -->
+<rect x="55" y="205" width="300" height="330" rx="18" class="panel" filter="url(#shadow)"/>
+<text x="85" y="250" class="h">Outils requis</text>
+<rect x="85" y="278" width="65" height="65" rx="13" fill="#f58a24"/><text x="117" y="322" text-anchor="middle" fill="#fff" font-size="25" font-weight="700">X</text>
+<text x="170" y="305" font-size="24" font-weight="700">XAMPP</text><text x="170" y="333" class="small muted">Apache • PHP • MySQL</text>
+<rect x="85" y="370" width="65" height="65" rx="13" fill="#1479c9"/><text x="117" y="414" text-anchor="middle" fill="#fff" font-size="24" font-weight="700">VS</text>
+<text x="170" y="397" font-size="24" font-weight="700">VS Code</text><text x="170" y="425" class="small muted">Écriture du code</text>
+<circle cx="117" cy="485" r="30" fill="#e9f1ff" stroke="#2c65a5" stroke-width="5"/><text x="170" y="480" font-size="24" font-weight="700">Chrome</text><text x="170" y="508" class="small muted">Tests dans le navigateur</text>
+
+<!-- repository -->
+<rect x="1240" y="180" width="310" height="450" rx="18" class="panel" filter="url(#shadow)"/>
+<rect x="1240" y="180" width="310" height="70" rx="18" fill="url(#navy)"/>
+<text x="1395" y="223" text-anchor="middle" class="head" font-size="22">Dépôt GitHub</text>
+<text x="1270" y="290" font-size="22" font-weight="700">E-source/</text>
+<rect x="1265" y="310" width="260" height="54" rx="10" fill="#d9f6e5" stroke="#15945b" stroke-width="2"/>
+<text x="1290" y="345" font-size="25" font-weight="700" fill="#12643f">📁 admi/</text>
+<text x="1280" y="405" class="p">README.md</text>
+<text x="1280" y="450" class="p">architecture-deploiement-</text><text x="1280" y="480" class="p">local.svg</text>
+<path d="M1240 337C1210 337 1215 400 1198 400" stroke="#15945b" stroke-width="4" fill="none" stroke-dasharray="8 7"/>
+<text x="1270" y="540" class="small muted">Même branche : main</text>
+<text x="1270" y="575" class="small muted">Futurs commits admin ici</text>
+
+<!-- roles -->
+<rect x="55" y="585" width="300" height="275" rx="18" fill="#153f78"/>
+<text x="85" y="635" class="head" font-size="27">Espace Admin</text>
+<text x="88" y="685" class="head" font-size="21">✓ Gestion des produits</text>
+<text x="88" y="730" class="head" font-size="21">✓ Gestion des commandes</text>
+<text x="88" y="775" class="head" font-size="21">✓ Gestion des clients</text>
+<text x="88" y="820" class="head" font-size="21">✓ Suivi des paiements</text>
+
+<!-- bottom -->
+<rect x="55" y="900" width="1495" height="100" rx="18" fill="#e4f6eb" stroke="#15945b" stroke-width="2"/>
+<text x="90" y="943" font-size="25" font-weight="700" fill="#145b3a">Étapes de démarrage</text>
+<text x="90" y="977" font-size="20">Démarrer Apache/MySQL → créer e_source → importer src/database/schema.sql → configurer src/config/config.php → tester l’API</text>
+<text x="800" y="1030" text-anchor="middle" font-size="16" fill="#52627a">E-SOURCE • Architecture de développement local • Document de travail évolutif</text>
+</svg>
