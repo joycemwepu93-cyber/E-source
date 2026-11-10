@@ -1,75 +1,183 @@
-const products = [
-  {id:1,name:"Chemise classique",category:"Hommes",type:"Vêtements",price:28,image:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=85"},
-  {id:2,name:"Ensemble élégant",category:"Femmes",type:"Vêtements",price:42,image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=85"},
-  {id:3,name:"Sneakers urbaines",category:"Chaussures",type:"Chaussures",price:55,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"},
-  {id:4,name:"Veste décontractée",category:"Hommes",type:"Vêtements",price:48,image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=85"},
-  {id:5,name:"Sac du quotidien",category:"Accessoires",type:"Accessoires",price:32,image:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=85"},
-  {id:6,name:"Robe moderne",category:"Femmes",type:"Vêtements",price:38,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=85"},
-  {id:7,name:"Tenue enfant",category:"Enfants",type:"Vêtements",price:24,image:"https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=85"},
-  {id:8,name:"Montre minimaliste",category:"Accessoires",type:"Accessoires",price:35,image:"https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=85"}
-];
+const API_URL = new URL("src/api/index.php", document.baseURI).toString();
+
+let products = [];
 let selectedCategory = "Tout";
-let cart = 0;
+let toastTimer;
+
 const grid = document.querySelector("#productGrid");
 const searchInput = document.querySelector("#searchInput");
 const toast = document.querySelector("#toast");
-let toastTimer;
+const filters = document.querySelector("#filters");
 
-function renderProducts(){
+async function apiGet(action) {
+  const response = await fetch(`${API_URL}?action=${encodeURIComponent(action)}`, {
+    method: "GET",
+    credentials: "same-origin",
+    headers: { Accept: "application/json" }
+  });
+
+  let result;
+  try {
+    result = await response.json();
+  } catch {
+    throw new Error("Le serveur a retourné une réponse invalide.");
+  }
+
+  if (!response.ok || result.success !== true) {
+    throw new Error(result.error || `Erreur serveur (${response.status}).`);
+  }
+  return result.data;
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+function createFilterButtons(categories) {
+  const names = ["Tout", ...categories.map(category => category.name)];
+  filters.replaceChildren();
+
+  names.forEach(name => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "filter" + (name === selectedCategory ? " active" : "");
+    button.dataset.category = name;
+    button.textContent = name;
+    filters.append(button);
+  });
+}
+
+function formatPrice(price, currency) {
+  const amount = Number(price);
+  if (!Number.isFinite(amount)) return "Prix à confirmer";
+  return `${amount.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} ${currency || "USD"}`;
+}
+
+function renderProducts() {
   const query = searchInput.value.trim().toLocaleLowerCase("fr");
   const visible = products.filter(product => {
-    const categoryMatch = selectedCategory === "Tout" || product.category === selectedCategory || (selectedCategory === "Chaussures" && product.type === "Chaussures");
-    const searchMatch = (product.name + " " + product.category + " " + product.type).toLocaleLowerCase("fr").includes(query);
+    const categoryMatch = selectedCategory === "Tout" ||
+      product.category === selectedCategory ||
+      (selectedCategory === "Chaussures" && product.category === "Chaussures");
+    const searchMatch = [product.name, product.category, product.description]
+      .filter(Boolean)
+      .join(" ")
+      .toLocaleLowerCase("fr")
+      .includes(query);
     return categoryMatch && searchMatch;
   });
-  document.querySelector("#productTotal").textContent = visible.length + (visible.length > 1 ? " articles" : " article");
-  if(!visible.length){
-    grid.innerHTML = '<p class="empty-state">Aucun article ne correspond à votre recherche.</p>';
+
+  document.querySelector("#productTotal").textContent =
+    `${visible.length} ${visible.length > 1 ? "articles" : "article"}`;
+
+  grid.replaceChildren();
+
+  if (!visible.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "Aucun article ne correspond à votre recherche.";
+    grid.append(empty);
     return;
   }
-  grid.innerHTML = visible.map(product => `
-    <article class="product-card">
-      <div class="product-image">
-        <img src="${product.image}" alt="${product.name}" loading="lazy">
-        <span class="product-tag">${product.category}</span>
-      </div>
-      <div class="product-info">
-        <p class="product-category">${product.type}</p>
-        <h3 class="product-name">${product.name}</h3>
-        <div class="product-bottom">
-          <span class="product-price">${product.price.toLocaleString("fr-FR")} $</span>
-          <button class="add-button" data-add="${product.id}">+ Ajouter</button>
-        </div>
-      </div>
-    </article>`).join("");
+
+  visible.forEach(product => {
+    const card = document.createElement("article");
+    card.className = "product-card";
+
+    const imageWrap = document.createElement("div");
+    imageWrap.className = "product-image";
+
+    const image = document.createElement("img");
+    image.src = product.image_url || "https://placehold.co/800x1000?text=E-source";
+    image.alt = product.name;
+    image.loading = "lazy";
+    image.onerror = () => {
+      image.onerror = null;
+      image.src = "https://placehold.co/800x1000?text=Image+indisponible";
+    };
+
+    const tag = document.createElement("span");
+    tag.className = "product-tag";
+    tag.textContent = product.category || "Autres";
+    imageWrap.append(image, tag);
+
+    const info = document.createElement("div");
+    info.className = "product-info";
+
+    const category = document.createElement("p");
+    category.className = "product-category";
+    category.textContent = product.category || "Boutique";
+
+    const name = document.createElement("h3");
+    name.className = "product-name";
+    name.textContent = product.name;
+
+    const bottom = document.createElement("div");
+    bottom.className = "product-bottom";
+
+    const price = document.createElement("span");
+    price.className = "product-price";
+    price.textContent = formatPrice(product.price, product.currency);
+
+    const stock = document.createElement("span");
+    stock.className = "product-category";
+    const quantity = Number(product.stock_quantity);
+    stock.textContent = quantity > 0 ? `En stock : ${quantity}` : "Rupture de stock";
+
+    bottom.append(price);
+    info.append(category, name, bottom, stock);
+    card.append(imageWrap, info);
+    grid.append(card);
+  });
 }
-function selectCategory(category){
+
+function selectCategory(category) {
   selectedCategory = category;
-  document.querySelectorAll(".filter").forEach(button => button.classList.toggle("active",button.dataset.category === category));
+  filters.querySelectorAll(".filter").forEach(button => {
+    button.classList.toggle("active", button.dataset.category === category);
+  });
   renderProducts();
 }
-document.querySelector("#filters").addEventListener("click",event=>{
+
+filters.addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
-  if(button) selectCategory(button.dataset.category);
+  if (button) selectCategory(button.dataset.category);
 });
-document.querySelectorAll("[data-nav-category]").forEach(link=>link.addEventListener("click",()=>selectCategory(link.dataset.navCategory)));
-searchInput.addEventListener("input",renderProducts);
-grid.addEventListener("click",event=>{
-  const button = event.target.closest("[data-add]");
-  if(!button) return;
-  const product = products.find(item=>item.id === Number(button.dataset.add));
-  cart++;
-  document.querySelector("#cartCount").textContent = cart;
-  toast.textContent = product.name + " ajouté au panier (démo).";
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>toast.classList.remove("show"),2400);
+
+document.querySelectorAll("[data-nav-category]").forEach(link => {
+  link.addEventListener("click", () => selectCategory(link.dataset.navCategory));
 });
-document.querySelector("#cartButton").addEventListener("click",()=>{
-  toast.textContent = cart ? cart + " article(s) dans votre panier. Le panier complet sera ajouté dans une prochaine étape." : "Votre panier est encore vide.";
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>toast.classList.remove("show"),3000);
+
+searchInput.addEventListener("input", renderProducts);
+
+document.querySelector("#cartButton").addEventListener("click", () => {
+  showToast("Le panier connecté sera finalisé à l’étape suivante.");
 });
+
+async function initializeCatalog() {
+  grid.textContent = "Chargement du catalogue…";
+
+  try {
+    const [categoryData, productData] = await Promise.all([
+      apiGet("categories"),
+      apiGet("products")
+    ]);
+
+    products = Array.isArray(productData) ? productData : [];
+    createFilterButtons(Array.isArray(categoryData) ? categoryData : []);
+    renderProducts();
+  } catch (error) {
+    grid.replaceChildren();
+    const message = document.createElement("p");
+    message.className = "empty-state";
+    message.textContent = `Impossible de charger le catalogue : ${error.message} Vérifiez que XAMPP (Apache et MySQL) est démarré et que la base e_source est configurée.`;
+    grid.append(message);
+    document.querySelector("#productTotal").textContent = "Catalogue indisponible";
+  }
+}
+
 document.querySelector("#year").textContent = new Date().getFullYear();
-renderProducts();
+initializeCatalog();
