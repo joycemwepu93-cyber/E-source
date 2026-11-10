@@ -41,4 +41,14 @@ Les modes espèces (`cash`), Mobile Money (`mobile_money`) et crédit (`credit`)
 Mots de passe hachés, requêtes PDO préparées, sessions renouvelées à la connexion, cookies HttpOnly/SameSite, contrôle CSRF et rôle admin côté serveur. Le stock est contrôlé et décrémenté dans une transaction. Les erreurs internes sont journalisées.
 Avant mise en production : HTTPS obligatoire, limitation des tentatives de connexion, journal d'audit, sauvegardes, tests automatisés, règles CORS strictes et intégration Mobile Money réelle.
 
-Le frontend d'origine reste intact. Les écrans de connexion, panier complet, commandes et administration devront être raccordés à cette API lors d'une étape frontend séparée, en préservant les styles actuels.
+## Frontend raccordé
+Le fichier `index.html` conserve la structure visuelle du catalogue. `script.js` consomme désormais l'API PHP pour charger les produits depuis MySQL, gérer les comptes (inscription/connexion/déconnexion), le panier, les commandes et les écrans d'administration (produits, catégories, commandes, clients et autorisation de crédit). Les ajouts de styles dans `style.css` servent uniquement aux panneaux fonctionnels et reprennent les couleurs et polices existantes.
+
+Pour tester localement :
+1. Installer et configurer PHP/MySQL selon les étapes précédentes.
+2. Ouvrir le site via Apache, par exemple `http://localhost/E-source/` (ne pas ouvrir `index.html` directement avec `file://`).
+3. Vérifier l'API à `http://localhost/E-source/src/api/index.php?action=health`.
+4. Créer un compte, ajouter des produits dans la base via phpMyAdmin ou l'espace admin, puis tester panier et commande.
+5. Pour l'administration, promouvoir un compte de confiance avec la requête SQL de la section « Premier administrateur », puis se reconnecter.
+
+Les commandes espèces et crédit sont enregistrées côté boutique. Le choix Mobile Money est actuellement une demande enregistrée en attente de traitement manuel : aucun paiement électronique réel n'est encore déclenché. La validation/enregistrement des paiements, les reçus et l'intégration du prestataire Mobile Money restent à réaliser. Cette livraison n'a pas été exécutée dans un environnement PHP/MySQL réel ; effectuer les essais ci-dessus avant toute mise en production.
