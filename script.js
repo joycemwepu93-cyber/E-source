@@ -76,8 +76,8 @@ async function apiGet(action) {
   return result.data;
 }
 
-function createFilterButtons(categories) {
-  const names = ["Tout", ...categories.map(category => category.name).filter(Boolean)];
+function createFilterButtons() {
+  const names = ["Tout", "Femmes", "Hommes", "Enfants", "Autres"];
   filters.replaceChildren();
   names.forEach(name => {
     const button = document.createElement("button");
@@ -95,13 +95,19 @@ function formatPrice(price, currency) {
   return `${amount.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} ${currency || "USD"}`;
 }
 
+function categoryGroup(category) {
+  const value = String(category || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  if (/femme|women/.test(value)) return "Femmes";
+  if (/homme|men/.test(value)) return "Hommes";
+  if (/enfant|kids|baby/.test(value)) return "Enfants";
+  return "Autres";
+}
+
 function renderProducts() {
   const query = searchInput.value.trim().toLocaleLowerCase("fr");
   const visible = products.map((product, index) => ({ product, index })).filter(({ product }) => {
     const categoryMatch = selectedCategory === "Tout" ||
-      product.category === selectedCategory ||
-      (selectedCategory === "Chaussures" && /chauss/i.test(product.category || "")) ||
-      (selectedCategory === "Accessoires" && /access/i.test(product.category || ""));
+      categoryGroup(product.category) === selectedCategory;
     const searchMatch = [product.name, product.category, product.description]
       .filter(Boolean).join(" ").toLocaleLowerCase("fr").includes(query);
     return categoryMatch && searchMatch;
@@ -125,7 +131,7 @@ function renderProducts() {
     imageWrap.dataset.openProduct = String(index);
     imageWrap.setAttribute("aria-label", `Voir les détails de ${product.name || "cet article"}`);
     const image = document.createElement("img");
-    image.src = product.image_url || "https://placehold.co/800x1000/f1eee7/17243b?text=E-SOURCE";
+    image.src = product.image_url || imageUrl(GITHUB_IMAGES[index % 8]);
     image.alt = product.name || "Article E-source";
     image.loading = "lazy";
     image.onerror = () => {
@@ -165,6 +171,17 @@ function renderProducts() {
   });
 }
 
+function categoryDescription(category) {
+  const group = categoryGroup(category);
+  const descriptions = {
+    Femmes: "Découvrez cette pièce de la sélection Femme de Boutique La Source. Pour connaître les matières, les tailles disponibles et les conseils d'entretien, contactez notre équipe.",
+    Hommes: "Découvrez cette pièce de la sélection Homme de Boutique La Source. Pour connaître les matières, les tailles disponibles et les conseils d'entretien, contactez notre équipe.",
+    Enfants: "Découvrez cet article de la sélection Enfant de Boutique La Source. Pour connaître les tailles disponibles et les détails, contactez notre équipe.",
+    Autres: "Découvrez cet article parmi les chaussures, sacs et accessoires sélectionnés par Boutique La Source. Contactez notre équipe pour obtenir tous les détails."
+  };
+  return descriptions[group];
+}
+
 function openProductDetails(index) {
   const product = products[index];
   if (!product) return;
@@ -180,7 +197,7 @@ function openProductDetails(index) {
   document.querySelector("#detailName").textContent = product.name || "Article E-source";
   document.querySelector("#detailPrice").textContent = formatPrice(product.price, product.currency);
   document.querySelector("#detailDescription").textContent =
-    product.description?.trim() || "La boutique n'a pas encore ajouté de description pour cet article. Contactez-nous pour en savoir plus.";
+    product.description?.trim() || categoryDescription(product.category);
   const quantity = Number(product.stock_quantity);
   const stock = document.querySelector("#detailStock");
   stock.textContent = quantity > 0 ? "● Disponible en boutique" : "● Actuellement indisponible";
@@ -261,7 +278,7 @@ async function initializeCatalog() {
       apiGet("categories"), apiGet("products")
     ]);
     products = Array.isArray(productData) ? productData : [];
-    createFilterButtons(Array.isArray(categoryData) ? categoryData : []);
+    createFilterButtons();
     renderProducts();
   } catch (error) {
     grid.replaceChildren();
