@@ -57,3 +57,18 @@
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Catégories explicites : femme, homme, enfant et autres */
+.category-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:330px;gap:16px}
+.category-women,.category-men,.category-kids,.category-other{grid-column:auto;grid-row:auto;min-width:0}
+.category-card img{object-position:center;filter:saturate(.92)}
+.category-card:hover img{filter:saturate(1.04)}
+.category-men img{object-position:center 25%}
+.category-kids img{object-position:center 35%}
+.category-other img{object-position:center 30%}
+.category-name{font-size:clamp(19px,2vw,25px)}
+.product-image img{background:#f0ede7}
+.modal-description{max-width:52ch}
+@media(max-width:900px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:260px 260px}}
+@media(max-width:520px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:220px 220px;gap:10px}.category-meta{font-size:7px}.category-name{font-size:18px}}
+@media(max-width:360px){.category-grid{grid-template-columns:1fr;grid-template-rows:230px 230px 230px 230px}}
