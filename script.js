@@ -97,7 +97,7 @@ function formatPrice(price, currency) {
 
 function renderProducts() {
   const query = searchInput.value.trim().toLocaleLowerCase("fr");
-  const visible = products.filter(product => {
+  const visible = products.map((product, index) => ({ product, index })).filter(({ product }) => {
     const categoryMatch = selectedCategory === "Tout" ||
       product.category === selectedCategory ||
       (selectedCategory === "Chaussures" && /chauss/i.test(product.category || "")) ||
@@ -116,11 +116,14 @@ function renderProducts() {
     grid.append(empty);
     return;
   }
-  visible.forEach(product => {
+  visible.forEach(({ product, index }) => {
     const card = document.createElement("article");
     card.className = "product-card";
-    const imageWrap = document.createElement("div");
-    imageWrap.className = "product-image";
+    const imageWrap = document.createElement("button");
+    imageWrap.type = "button";
+    imageWrap.className = "product-image product-image-button";
+    imageWrap.dataset.openProduct = String(index);
+    imageWrap.setAttribute("aria-label", `Voir les détails de ${product.name || "cet article"}`);
     const image = document.createElement("img");
     image.src = product.image_url || "https://placehold.co/800x1000/f1eee7/17243b?text=E-SOURCE";
     image.alt = product.name || "Article E-source";
@@ -151,17 +154,59 @@ function renderProducts() {
     stock.className = "product-stock" + (quantity > 0 ? "" : " out");
     stock.textContent = quantity > 0 ? "Disponible" : "Indisponible";
     bottom.append(price, stock);
-    info.append(category, name, bottom);
-    if (product.description) {
-      const description = document.createElement("p");
-      description.className = "product-description";
-      description.textContent = product.description;
-      info.append(description);
-    }
+    const detailsButton = document.createElement("button");
+    detailsButton.type = "button";
+    detailsButton.className = "product-details-button";
+    detailsButton.dataset.openProduct = String(index);
+    detailsButton.textContent = "Voir les détails";
+    info.append(category, name, bottom, detailsButton);
     card.append(imageWrap, info);
     grid.append(card);
   });
 }
+
+function openProductDetails(index) {
+  const product = products[index];
+  if (!product) return;
+  const modal = document.querySelector("#productModal");
+  const image = document.querySelector("#detailImage");
+  image.src = product.image_url || "https://placehold.co/900x1100/f1eee7/17243b?text=E-SOURCE";
+  image.alt = product.name || "Article E-source";
+  image.onerror = () => {
+    image.onerror = null;
+    image.src = "https://placehold.co/900x1100/f1eee7/17243b?text=E-SOURCE";
+  };
+  document.querySelector("#detailCategory").textContent = product.category || "Collection E-source";
+  document.querySelector("#detailName").textContent = product.name || "Article E-source";
+  document.querySelector("#detailPrice").textContent = formatPrice(product.price, product.currency);
+  document.querySelector("#detailDescription").textContent =
+    product.description?.trim() || "La boutique n'a pas encore ajouté de description pour cet article. Contactez-nous pour en savoir plus.";
+  const quantity = Number(product.stock_quantity);
+  const stock = document.querySelector("#detailStock");
+  stock.textContent = quantity > 0 ? "● Disponible en boutique" : "● Actuellement indisponible";
+  stock.classList.toggle("out", !(quantity > 0));
+  if (typeof modal.showModal === "function") modal.showModal();
+  else modal.setAttribute("open", "");
+}
+
+grid.addEventListener("click", event => {
+  const trigger = event.target.closest("[data-open-product]");
+  if (trigger) openProductDetails(Number(trigger.dataset.openProduct));
+});
+
+const productModal = document.querySelector("#productModal");
+function closeProductModal() {
+  if (typeof productModal.close === "function" && productModal.open) productModal.close();
+  else productModal.removeAttribute("open");
+}
+document.querySelector("#modalClose").addEventListener("click", closeProductModal);
+document.querySelector("#modalDone").addEventListener("click", closeProductModal);
+productModal.addEventListener("click", event => {
+  if (event.target === productModal) closeProductModal();
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeProductModal();
+});
 
 function selectCategory(category) {
   selectedCategory = category;
