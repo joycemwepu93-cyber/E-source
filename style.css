@@ -72,3 +72,61 @@
 @media(max-width:900px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:260px 260px}}
 @media(max-width:520px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:220px 220px;gap:10px}.category-meta{font-size:7px}.category-name{font-size:18px}}
 @media(max-width:360px){.category-grid{grid-template-columns:1fr;grid-template-rows:230px 230px 230px 230px}}
+
+
+/* Espace client — reprend strictement les tokens et composants E-SOURCE */
+.account-trigger{white-space:nowrap}
+.shop-dialog{width:min(740px,calc(100% - 28px));max-height:90vh;overflow:auto;padding:0;border:1px solid var(--line);background:var(--paper);color:var(--ink);box-shadow:0 24px 90px rgba(4,13,28,.35)}
+.shop-dialog::backdrop{background:rgba(7,16,31,.76);backdrop-filter:blur(4px)}
+.shop-panel{padding:clamp(20px,5vw,40px);background:var(--paper)}
+.shop-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.shop-kicker{font-size:8px;letter-spacing:2px;color:var(--gold);font-weight:700;margin:0 0 10px}
+.shop-head h2{font:500 clamp(26px,4vw,36px)/1.15 var(--serif);color:var(--navy);margin:0}
+.shop-close{border:1px solid var(--line);background:#fff;color:var(--navy);width:38px;height:38px;font-size:24px;line-height:1}
+.shop-tabs,.shop-actions{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 20px}
+.shop-tab,.shop-secondary{border:1px solid #d7c7a5;background:transparent;color:var(--navy);padding:11px 15px;font:600 10px var(--sans);letter-spacing:.2px;cursor:pointer}
+.shop-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.shop-primary{min-height:45px;border:0;background:var(--gold);color:var(--navy);padding:12px 19px;font:700 10px var(--sans);letter-spacing:.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:12px}
+.shop-primary:hover{background:var(--gold-light)}
+.shop-secondary:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+.shop-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.shop-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.shop-field.full{grid-column:1/-1}
+.shop-field label{font-size:8px;font-weight:700;letter-spacing:1.4px;color:#777d85;text-transform:uppercase}
+.shop-field input,.shop-field select,.shop-field textarea{width:100%;border:1px solid var(--line);padding:13px 14px;background:#fff;color:var(--ink);font:12px var(--sans);min-width:0;border-radius:0;outline:none}
+.shop-field input:focus,.shop-field select:focus,.shop-field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(197,166,109,.15)}
+.shop-field textarea{min-height:80px;resize:vertical}
+.shop-muted{color:var(--muted);font-size:10px;line-height:1.8}
+.shop-error,.shop-success{padding:12px 14px;font-size:11px;margin:12px 0}
+.shop-error{color:#9b554c;background:#f8eeeb}
+.shop-success{color:#4d795d;background:#edf4ed}
+.shop-items,.shop-orders{display:grid;gap:12px}
+.shop-item{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:13px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:13px}
+.shop-item img{width:72px;height:84px;object-fit:cover;background:var(--cream)}
+.shop-item h3{font:500 16px var(--serif);color:var(--navy);margin:0 0 5px}
+.shop-item p{font-size:10px;color:var(--muted);margin:0 0 8px}
+.shop-qty{display:flex;align-items:center;gap:8px}
+.shop-qty button{width:27px;height:27px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.shop-remove{border:0;background:none;color:#9b554c;text-decoration:underline;font-size:9px;cursor:pointer;margin-top:7px;padding:0}
+.shop-total{display:flex;justify-content:space-between;border-top:1px solid var(--gold-light);margin-top:18px;padding-top:18px;font-weight:700;font-size:12px;color:var(--navy)}
+.shop-empty{padding:26px 16px;text-align:center;background:var(--cream);color:var(--muted);font-size:11px}
+.shop-profile{display:grid;grid-template-columns:92px 1fr;gap:18px;align-items:center;margin-bottom:22px}
+.shop-avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;background:var(--cream);border:2px solid var(--gold-light)}
+.shop-order{border:1px solid var(--line);padding:13px;display:flex;justify-content:space-between;gap:12px;align-items:center;background:#fff}
+.shop-order strong{font-size:11px;color:var(--navy)}
+.shop-order small{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+.shop-status{font-size:8px;letter-spacing:.8px;text-transform:uppercase;background:var(--cream);color:var(--navy);padding:7px 9px}
+.shop-photo-preview{max-width:100%;max-height:150px;object-fit:contain;margin-top:8px;background:var(--cream)}
+.modal-add-cart{margin-top:8px;width:100%;border:0;cursor:pointer}
+@media(max-width:560px){
+ .shop-form{grid-template-columns:1fr}
+ .shop-field.full{grid-column:auto}
+ .shop-profile{grid-template-columns:68px 1fr;gap:12px}
+ .shop-avatar{width:66px;height:66px}
+ .shop-item{grid-template-columns:58px minmax(0,1fr)}
+ .shop-item img{width:58px;height:70px}
+ .shop-item>.shop-item-total{grid-column:2}
+ .shop-panel{padding:21px 16px}
+ .shop-order{align-items:flex-start;flex-direction:column}
+ .account-trigger{padding:0 8px;font-size:9px}
+}
