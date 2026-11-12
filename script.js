@@ -245,9 +245,7 @@ document.querySelectorAll("[data-nav-category]").forEach(link => {
   });
 });
 searchInput.addEventListener("input", renderProducts);
-document.querySelector("#cartButton").addEventListener("click", () => {
-  showToast("Le panier connecté sera disponible dans la prochaine étape.");
-});
+
 
 function renderLookbook() {
   const track = document.querySelector("#lookbookTrack");
@@ -293,3 +291,8 @@ async function initializeCatalog() {
 document.querySelector("#year").textContent = new Date().getFullYear();
 renderLookbook();
 initializeCatalog();
+
+// Charge les fonctions de compte client, panier et commande WhatsApp.
+const accountEnhancement = document.createElement("script");
+accountEnhancement.src = "account.js";
+document.body.append(accountEnhancement);
