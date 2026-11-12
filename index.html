@@ -3,53 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="E-source — vêtements, chaussures et accessoires pour toute la famille.">
-  <title>E-source | Boutique La Source</title>
+  <meta name="theme-color" content="#101d35">
+  <meta name="description" content="E-source, Boutique La Source : vêtements, chaussures, sacs et accessoires pour toute la famille.">
+  <title>E-SOURCE — Le style, tout simplement</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="topbar">BIENVENUE CHEZ E-SOURCE — LA MODE POUR TOUTE LA FAMILLE</div>
+  <div class="announcement"><span>BIENVENUE CHEZ E-SOURCE</span><i></i><span>LA MODE POUR TOUTE LA FAMILLE</span><i></i><span>BOUTIQUE LA SOURCE</span></div>
   <header class="site-header">
-    <a class="brand" href="#" aria-label="E-source accueil">E<span>-</span>SOURCE</a>
-    <nav class="main-nav" aria-label="Navigation principale">
-      <a href="#catalogue">Catalogue</a><a href="#catalogue" data-nav-category="Hommes">Hommes</a><a href="#catalogue" data-nav-category="Femmes">Femmes</a><a href="#catalogue" data-nav-category="Enfants">Enfants</a>
+    <a class="brand" href="#" aria-label="E-source, accueil"><span class="brand-mark">E</span><span class="brand-name">E-SOURCE<small>BOUTIQUE LA SOURCE</small></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
+      <a class="nav-link active" href="#">Accueil</a>
+      <a class="nav-link" href="#catalogue" data-nav-category="Femmes">Femmes</a>
+      <a class="nav-link" href="#catalogue" data-nav-category="Hommes">Hommes</a>
+      <a class="nav-link" href="#catalogue" data-nav-category="Enfants">Enfants</a>
+      <a class="nav-link" href="#catalogue">Chaussures & sacs</a>
     </nav>
-    <button class="cart-button" id="cartButton" aria-label="Panier">Panier <span id="cartCount">0</span></button>
+    <div class="header-actions">
+      <a class="header-search" href="#catalogue" aria-label="Rechercher"><span>⌕</span></a>
+      <button class="cart-button" id="cartButton" aria-label="Voir le panier"><span class="cart-icon">♧</span><span class="cart-label">Mon panier</span><b id="cartCount">0</b></button>
+    </div>
   </header>
 
   <main>
-    <section class="intro">
-      <div>
-        <p class="eyebrow">BOUTIQUE LA SOURCE</p>
-        <h1>Le style qui vous<br><span>ressemble.</span></h1>
-        <p class="intro-copy">Découvrez notre sélection de vêtements, chaussures et accessoires pour tous les jours et toutes les occasions.</p>
-        <a class="primary-button" href="#catalogue">Découvrir le catalogue <span>→</span></a>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> COLLECTION & STYLE</p>
+        <h1>Le style a<br>sa <em>signature.</em></h1>
+        <p class="hero-text">Des pièces choisies avec goût, pour révéler votre style au quotidien. Trouvez votre prochain coup de cœur chez E-source.</p>
+        <div class="hero-actions"><a class="button button-gold" href="#catalogue">Explorer la boutique <span>↗</span></a><a class="text-link" href="#univers">Découvrir notre univers <span>→</span></a></div>
+        <div class="hero-foot"><span>01 / 03</span><span class="hero-rule"></span><span>ÉLÉGANCE AU QUOTIDIEN</span></div>
       </div>
-      <div class="intro-note"><span class="note-line"></span><p>Du style. Du choix.<br>Pour toute la famille.</p></div>
+      <div class="hero-visual">
+        <div class="hero-photo"><img src="https://raw.githubusercontent.com/joycemwepu93-cyber/E-source/main/documentation/photoEcommerce/WhatsApp%20Image%202026-10-31%20at%2018.15.41.jpeg" alt="Tenue élégante en jean et chemise blanche" fetchpriority="high"></div>
+        <div class="hero-stamp"><span>LE BON GOÛT</span><b>✳</b><span>À PORTÉE DE MAIN</span></div>
+        <div class="hero-caption"><span>LA NOUVELLE ALLURE</span><span>— E-SOURCE</span></div>
+      </div>
+      <div class="hero-index">E-SOURCE <span>·</span> 2026</div>
+    </section>
+
+    <section class="trust-strip" aria-label="Les engagements de la boutique">
+      <div><span class="trust-icon">✧</span><p><b>Une sélection soignée</b><small>Des pièces choisies avec attention</small></p></div>
+      <div><span class="trust-icon">◇</span><p><b>Pour tous les styles</b><small>Mode femme, homme et enfant</small></p></div>
+      <div><span class="trust-icon">♡</span><p><b>À votre écoute</b><small>Une boutique proche de vous</small></p></div>
+    </section>
+
+    <section class="categories-section" id="univers">
+      <div class="section-topline"><span class="eyebrow">TROUVEZ VOTRE STYLE</span><span class="section-number">01 — NOS UNIVERS</span></div>
+      <div class="section-title-row"><div><h2>Un univers, <em>mille façons</em><br>de se distinguer.</h2></div><p>Des essentiels aux pièces qui attirent le regard, découvrez nos inspirations et composez un style qui vous ressemble.</p></div>
+      <div class="category-grid">
+        <a class="category-card category-women" href="#catalogue" data-nav-category="Femmes"><img src="https://raw.githubusercontent.com/joycemwepu93-cyber/E-source/main/documentation/photoEcommerce/WhatsApp%20Image%202026-10-31%20at%2018.15.41.jpeg" alt="Style féminin en jean" loading="lazy"><span class="category-overlay"></span><span class="category-meta">01 / COLLECTION</span><span class="category-name">Pour elle <i>↗</i></span></a>
+        <a class="category-card category-bags" href="#catalogue" data-nav-category="Accessoires"><img src="https://raw.githubusercontent.com/joycemwepu93-cyber/E-source/main/documentation/photoEcommerce/WhatsApp%20Image%202026-10-31%20at%2018.15.45.jpeg" alt="Sac à main en cuir" loading="lazy"><span class="category-overlay"></span><span class="category-meta">02 / ACCESSOIRES</span><span class="category-name">Les détails <i>↗</i></span></a>
+        <a class="category-card category-shoes" href="#catalogue" data-nav-category="Chaussures"><img src="https://raw.githubusercontent.com/joycemwepu93-cyber/E-source/main/documentation/photoEcommerce/WhatsApp%20Image%202026-10-31%20at%2018.15.50.jpeg" alt="Escarpins élégants" loading="lazy"><span class="category-overlay"></span><span class="category-meta">03 / CHAUSSURES</span><span class="category-name">Prendre de l'avance <i>↗</i></span></a>
+        <a class="category-card category-scarves" href="#catalogue" data-nav-category="Accessoires"><img src="https://raw.githubusercontent.com/joycemwepu93-cyber/E-source/main/documentation/photoEcommerce/WhatsApp%20Image%202026-10-31%20at%2018.15.42.jpeg" alt="Foulards colorés" loading="lazy"><span class="category-overlay"></span><span class="category-meta">04 / SIGNATURE</span><span class="category-name">Les accessoires <i>↗</i></span></a>
+      </div>
     </section>
 
     <section class="catalogue-section" id="catalogue">
-      <div class="section-heading"><div><p class="eyebrow">NOTRE SÉLECTION</p><h2>Le catalogue</h2></div><p class="product-total" id="productTotal">Articles disponibles</p></div>
-      <div class="catalogue-tools">
-        <div class="filters" id="filters" aria-label="Filtrer par catégorie">
-          <button class="filter active" data-category="Tout">Tout</button>
-          <button class="filter" data-category="Hommes">Hommes</button>
-          <button class="filter" data-category="Femmes">Femmes</button>
-          <button class="filter" data-category="Enfants">Enfants</button>
-          <button class="filter" data-category="Chaussures">Chaussures</button>
-          <button class="filter" data-category="Accessoires">Accessoires</button>
-        </div>
-        <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Rechercher un article..." aria-label="Rechercher un article"></label>
-      </div>
-      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      <div class="section-topline"><span class="eyebrow">LA SÉLECTION E-SOURCE</span><span class="section-number">02 — LE CATALOGUE</span></div>
+      <div class="catalogue-heading"><div><h2>Les pièces <em>à adopter.</em></h2><p>Les articles disponibles dans notre boutique, réunis au même endroit.</p></div><span class="product-total" id="productTotal">Chargement…</span></div>
+      <div class="catalogue-tools"><div class="filters" id="filters" aria-label="Filtrer par catégorie"><button class="filter active" data-category="Tout">Tout voir</button></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Que recherchez-vous ?" aria-label="Rechercher un article"><kbd>↵</kbd></label></div>
+      <div class="product-grid" id="productGrid" aria-live="polite"><div class="catalogue-loading"><span></span><p>Nous préparons votre sélection…</p></div></div>
+    </section>
+
+    <section class="editorial">
+      <div class="editorial-image"><img src="https://raw.githubusercontent.com/joycemwepu93-cyber/E-source/main/documentation/photoEcommerce/WhatsApp%20Image%202026-10-31%20at%2018.15.40.jpeg" alt="Sacs à main aux couleurs douces" loading="lazy"></div>
+      <div class="editorial-copy"><p class="eyebrow"><span></span> L'ART DU DÉTAIL</p><h2>La touche finale<br>fait toute <em>la différence.</em></h2><p>Un sac, un foulard, une paire de chaussures… Les bons détails donnent du caractère à chaque tenue. Laissez-vous inspirer par notre sélection.</p><a class="button button-outline" href="#inspirations">Voir les inspirations <span>↗</span></a><span class="editorial-note">SIMPLEMENT VOUS. NATURELLEMENT E-SOURCE.</span></div>
+    </section>
+
+    <section class="lookbook-section" id="inspirations">
+      <div class="section-topline"><span class="eyebrow">UN PEU D'INSPIRATION</span><span class="section-number">03 — LE LOOKBOOK</span></div>
+      <div class="lookbook-heading"><h2>Les détails qui <em>inspirent.</em></h2><p>Un aperçu de nos inspirations mode. Faites défiler pour découvrir les pièces.</p></div>
+      <div class="lookbook-track" id="lookbookTrack" aria-label="Galerie des inspirations E-source"></div>
+      <div class="lookbook-hint"><span>FAITES DÉFILER</span><span>SCROLL →</span></div>
     </section>
   </main>
 
-  <footer><a class="brand footer-brand" href="#">E<span>-</span>SOURCE</a><p>La mode pour toute la famille.</p><small>© <span id="year"></span> Boutique La Source. Tous droits réservés.</small></footer>
+  <footer class="site-footer">
+    <div class="footer-main"><div class="footer-brand-block"><a class="brand brand-footer" href="#"><span class="brand-mark">E</span><span class="brand-name">E-SOURCE<small>BOUTIQUE LA SOURCE</small></span></a><p>Le style, tout simplement.<br>La mode pour toute la famille.</p></div><div class="footer-nav"><span>EXPLORER</span><a href="#catalogue">Le catalogue</a><a href="#univers">Nos univers</a><a href="#inspirations">Inspirations</a></div><div class="footer-nav"><span>LA BOUTIQUE</span><a href="#catalogue">Femmes & hommes</a><a href="#catalogue">Chaussures & sacs</a><a href="#catalogue">Accessoires</a></div><div class="footer-note"><span>UNE ALLURE QUI VOUS RESSEMBLE.</span><b>Merci de votre visite.</b><p>Retrouvez ici les nouveautés et les pièces disponibles chez Boutique La Source.</p></div></div>
+    <div class="footer-bottom"><span>© <span id="year"></span> E-SOURCE — BOUTIQUE LA SOURCE</span><span>FAIT AVEC GOÛT <b>✳</b></span></div>
+  </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
