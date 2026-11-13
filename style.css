@@ -142,3 +142,15 @@
 .modal-buy-now{margin-top:9px;background:var(--navy);color:#fff;border:1px solid var(--navy)}
 .modal-buy-now:hover{background:#1b3155}
 @media(max-width:700px){.product-gallery-thumbs{padding:9px}.gallery-thumb{flex-basis:54px;width:54px;height:64px}}
+
+/* Action panier visible sur chaque article, quelle que soit sa catégorie */
+.product-add-cart{
+ width:100%;min-height:42px;margin-top:9px;padding:10px 12px;
+ border:1px solid var(--navy);background:var(--navy);color:#fff;
+ font-size:9px;font-weight:700;letter-spacing:.35px;
+ transition:background .2s,border-color .2s,transform .2s;
+}
+.product-add-cart:hover:not(:disabled){background:var(--gold);border-color:var(--gold);color:var(--navy);transform:translateY(-1px)}
+.product-add-cart:disabled{background:#e4e0d8;border-color:#e4e0d8;color:#8d8d89;cursor:not-allowed}
+.product-details-button{width:100%;min-height:38px;margin-top:9px;border:1px solid #d8d2c6;background:transparent;color:var(--navy);font-size:9px}
+.product-details-button:hover{border-color:var(--gold);color:var(--navy)}
