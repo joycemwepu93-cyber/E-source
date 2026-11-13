@@ -165,7 +165,13 @@ function renderProducts() {
     detailsButton.className = "product-details-button";
     detailsButton.dataset.openProduct = String(index);
     detailsButton.textContent = "Voir les détails";
-    info.append(category, name, bottom, detailsButton);
+    const addButton = document.createElement("button");
+    addButton.type = "button";
+    addButton.className = "product-add-cart";
+    addButton.dataset.addToCart = String(index);
+    addButton.textContent = quantity > 0 ? "Ajouter au panier" : "Indisponible";
+    addButton.disabled = !(quantity > 0);
+    info.append(category, name, bottom, detailsButton, addButton);
     card.append(imageWrap, info);
     grid.append(card);
   });
@@ -231,6 +237,17 @@ function openProductDetails(index) {
 }
 
 grid.addEventListener("click", event => {
+  const addTrigger = event.target.closest("[data-add-to-cart]");
+  if (addTrigger) {
+    const index = Number(addTrigger.dataset.addToCart);
+    const product = products[index];
+    if (product && typeof window.EsourceAddToCart === "function") {
+      window.EsourceAddToCart(product.id);
+    } else if (typeof window.EsourceAddToCart !== "function") {
+      showToast("Le panier est en cours de chargement. Réessayez dans un instant.");
+    }
+    return;
+  }
   const trigger = event.target.closest("[data-open-product]");
   if (trigger) openProductDetails(Number(trigger.dataset.openProduct));
 });
