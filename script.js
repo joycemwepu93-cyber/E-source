@@ -182,17 +182,41 @@ function categoryDescription(category) {
   return descriptions[group];
 }
 
+function productGallery(product) {
+  let extra = product.gallery_images || [];
+  if (typeof extra === "string") { try { extra = JSON.parse(extra); } catch { extra = []; } }
+  if (!Array.isArray(extra)) extra = [];
+  return [...new Set([product.image_url, ...extra].filter(url => typeof url === "string" && url.trim()).map(url => url.trim()))];
+}
+
 function openProductDetails(index) {
   const product = products[index];
   if (!product) return;
   const modal = document.querySelector("#productModal");
   const image = document.querySelector("#detailImage");
-  image.src = product.image_url || "https://placehold.co/900x1100/f1eee7/17243b?text=E-SOURCE";
+  const gallery = productGallery(product);
+  const images = gallery.length ? gallery : ["https://placehold.co/900x1100/f1eee7/17243b?text=E-SOURCE"];
+  image.src = images[0];
   image.alt = product.name || "Article E-source";
   image.onerror = () => {
     image.onerror = null;
     image.src = "https://placehold.co/900x1100/f1eee7/17243b?text=E-SOURCE";
   };
+  const galleryWrap = document.querySelector("#detailGallery");
+  galleryWrap.replaceChildren();
+  images.forEach((src, imageIndex) => {
+    const thumb = document.createElement("button");
+    thumb.type = "button"; thumb.className = "gallery-thumb" + (imageIndex === 0 ? " active" : "");
+    thumb.setAttribute("aria-label", `Afficher la photo ${imageIndex + 1}`);
+    const thumbImage = document.createElement("img"); thumbImage.src = src; thumbImage.alt = `${product.name || "Article"} — photo ${imageIndex + 1}`;
+    thumb.append(thumbImage);
+    thumb.addEventListener("click", () => {
+      image.src = images[imageIndex];
+      galleryWrap.querySelectorAll(".gallery-thumb").forEach((node, i) => node.classList.toggle("active", i === imageIndex));
+    });
+    galleryWrap.append(thumb);
+  });
+  galleryWrap.hidden = images.length < 2;
   document.querySelector("#detailCategory").textContent = product.category || "Collection E-source";
   document.querySelector("#detailName").textContent = product.name || "Article E-source";
   document.querySelector("#detailPrice").textContent = formatPrice(product.price, product.currency);
