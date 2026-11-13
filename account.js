@@ -33,6 +33,15 @@ async function showAccount(){const b=accountDlg.querySelector(".shop-body");if(!
 function updateCount(){if($("#cartCount"))$("#cartCount").textContent=String(cart.reduce((n,x)=>n+Number(x.quantity||0),0))}
 async function refreshCart(){if(!customer){cart=[];updateCount();return}try{cart=(await call("cart")).data||[]}catch{cart=[]}updateCount()}
 async function addToCart(p){if(!customer){if($("#productModal").open)$("#productModal").close();authView("login");open(authDlg);notice(authDlg.querySelector(".shop-body"),"Connectez-vous pour ajouter un article au panier.",true);return false}try{await refreshCart();const existing=cart.find(x=>Number(x.product_id)===Number(p.id));await call("cart","POST",{product_id:Number(p.id),quantity:existing?Number(existing.quantity)+1:1});await refreshCart();say("Article ajouté au panier.");return true}catch(e){say(e.message);return false}}
+window.EsourceAddToCart=async function(productId){
+ try{
+  await getCsrf();
+  await getUser();
+  const product=Array.isArray(products)?products.find(item=>Number(item.id)===Number(productId)):null;
+  if(!product){say("Cet article est introuvable. Actualisez le catalogue.");return false}
+  return await addToCart(product);
+ }catch(error){say(error.message);return false}
+};
 function renderCart(){const b=cartDlg.querySelector(".shop-body");if(!cart.length){b.innerHTML='<div class="shop-empty">Votre panier est vide. Explorez le catalogue pour choisir vos articles.</div><button class="shop-primary" id="esContinue">Continuer mes achats</button>';$("#esContinue",b).onclick=()=>cartDlg.close();return}
  const total=cart.reduce((n,x)=>n+Number(x.price)*Number(x.quantity),0),currency=cart[0].currency||"USD";
  b.innerHTML='<div class="shop-items">'+cart.map(x=>'<div class="shop-item"><img src="'+esc(x.image_url||"https://placehold.co/150x180/f0ece4/17243b?text=E-SOURCE")+'" alt=""><div><h3>'+esc(x.name)+'</h3><p>'+money(x.price,x.currency)+'</p><div class="shop-qty"><button data-q="-1" data-id="'+x.product_id+'">−</button><span>'+x.quantity+'</span><button data-q="1" data-id="'+x.product_id+'">+</button></div><button class="shop-remove" data-del="'+x.product_id+'">Retirer</button></div><strong class="shop-item-total">'+money(Number(x.price)*Number(x.quantity),x.currency)+'</strong></div>').join("")+'</div><div class="shop-total"><span>Total estimé</span><span>'+money(total,currency)+'</span></div><div class="shop-actions"><button class="shop-primary" id="esCheckout">Passer commande</button><button class="shop-secondary" id="esContinue">Continuer mes achats</button></div>';
