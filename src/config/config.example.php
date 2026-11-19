@@ -20,4 +20,8 @@ return [
         'session_name' => 'e_source_session',
         'allowed_origins' => [],
     ],
+    // Activer uniquement sur une machine de développement locale.
+    'payment' => [
+        'simulation_enabled' => false,
+    ],
 ];
