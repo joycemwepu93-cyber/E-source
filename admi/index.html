@@ -37,6 +37,7 @@
         <button class="nav-item" data-page="products"><span>◇</span> Produits & stocks</button>
         <button class="nav-item" data-page="orders"><span>▤</span> Commandes</button>
         <button class="nav-item" data-page="customers"><span>♙</span> Clients</button>
+        <button class="nav-item" data-page="payments"><span>¤</span> Paramètres de paiement</button>
       </nav>
       <div class="sidebar-bottom"><span class="status-dot"></span> Serveur local</div>
     </aside>
@@ -74,6 +75,18 @@
         <section class="page-section" id="page-customers">
           <div class="section-toolbar"><div><p class="eyebrow">RELATION CLIENT</p><h1>Clients</h1><p class="muted">Gérez l'accès des clients et leur éligibilité au paiement à crédit.</p></div><button class="button outline" id="refreshCustomers">↻ Actualiser</button></div>
           <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>E-mail</th><th>Téléphone</th><th>Crédit autorisé</th><th>Compte</th><th>Actions</th></tr></thead><tbody id="customersTable"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody></table></div></div>
+        </section>
+        <section class="page-section" id="page-payments">
+          <div class="section-toolbar"><div><p class="eyebrow">ENCAISSEMENT</p><h1>Paramètres de paiement</h1><p class="muted">Configurez les numéros qui seront affichés aux clients. Les paiements seront confirmés manuellement après vérification auprès de l’opérateur.</p></div></div>
+          <form id="paymentSettingsForm" class="panel">
+            <div class="panel-heading"><h3>Opérateurs Mobile Money</h3></div>
+            <div class="payment-setting-row"><label class="check-label"><input type="checkbox" name="airtel_money_enabled"> Activer Airtel Money</label><label>Numéro de réception<input name="airtel_money_phone" type="tel" maxlength="30" placeholder="+243…"></label></div>
+            <div class="payment-setting-row"><label class="check-label"><input type="checkbox" name="m_pesa_enabled"> Activer M-Pesa</label><label>Numéro de réception<input name="m_pesa_phone" type="tel" maxlength="30" placeholder="+243…"></label></div>
+            <div class="payment-setting-row"><label class="check-label"><input type="checkbox" name="orange_money_enabled"> Activer Orange Money</label><label>Numéro de réception<input name="orange_money_phone" type="tel" maxlength="30" placeholder="+243…"></label></div>
+            <label>Instructions à afficher au client<textarea name="instructions" rows="3" maxlength="500" placeholder="Ex. Envoyez le montant exact puis saisissez la référence de transaction."></textarea></label>
+            <p id="paymentSettingsError" class="form-error" role="alert"></p><button class="button primary" type="submit">Enregistrer les paramètres</button>
+          </form>
+          <p class="muted">Important : cette configuration affiche vos numéros et collecte les références. Elle ne déclenche pas encore un transfert automatique via l’API NetiKash.</p>
         </section>
         <p id="globalMessage" class="global-message" role="status"></p>
       </div>
