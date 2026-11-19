@@ -1,0 +1,7 @@
+# E-SOURCE — réglages Apache de base
+Options -Indexes
+DirectoryIndex index.html
+
+<FilesMatch "^(README\.md|.*\.sql|.*\.example\.php|\.gitignore)$">
+  Require all denied
+</FilesMatch>
