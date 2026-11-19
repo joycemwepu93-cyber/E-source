@@ -35,7 +35,7 @@ UPDATE users SET role='admin' WHERE email='adresse-admin@exemple.cd';
 Remplacer par l'adresse exacte du compte à promouvoir.
 
 ## Paiements
-Les modes espèces (`cash`), Mobile Money (`mobile_money`) et crédit (`credit`) sont représentés. Cette API n'exécute pas de transfert Mobile Money : il faudra choisir un prestataire, obtenir ses accès API et intégrer ses notifications de paiement. Le crédit est refusé par défaut ; un administrateur peut autoriser un client habituel via `credit_eligible`. Les plafonds et échéances restent à définir avec la boutique.
+Les modes espèces (`cash`), Mobile Money (`mobile_money`) et crédit (`credit`) sont représentés. L'administration permet de configurer les numéros Airtel Money, M-Pesa et Orange Money. Le client voit le numéro actif, choisit l'opérateur et saisit sa référence ; la commande reste en attente jusqu'à vérification manuelle par l'administrateur. Cette version ne déclenche pas de transfert et ne vérifie pas automatiquement les paiements via Netikash. Pour le paiement automatique, obtenir les accès marchand/API et intégrer les endpoints et notifications du prestataire. Pour une base existante, exécuter une fois `database/migrations/2026_11_19_add_mobile_money_settings.sql`. Le crédit est refusé par défaut ; un administrateur peut autoriser un client habituel via `credit_eligible`. Les plafonds et échéances restent à définir avec la boutique.
 
 ## Sécurité et limites
 Mots de passe hachés, requêtes PDO préparées, sessions renouvelées à la connexion, cookies HttpOnly/SameSite, contrôle CSRF et rôle admin côté serveur. Le stock est contrôlé et décrémenté dans une transaction. Les erreurs internes sont journalisées.
