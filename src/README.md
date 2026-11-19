@@ -40,6 +40,15 @@ Les modes espèces (`cash`), Mobile Money (`mobile_money`) et crédit (`credit`)
 ## Factures client
 Après validation, chaque commande conserve son statut habituel « En attente ». Le client peut ouvrir sa facture depuis la confirmation ou l’historique des commandes. Le bouton ouvre une page imprimable ; dans la boîte d’impression du navigateur, choisir « Enregistrer au format PDF ». L’API vérifie que la commande appartient au client connecté. Aucune migration SQL n’est nécessaire.
 
+## Paiement simulé Netikash (sans compte)
+Le dépôt peut être testé sans compte marchand ni clés API. Cette simulation est volontairement séparée de l'intégration réelle : elle ne contacte jamais Netikash et ne transfère aucun argent.
+
+Pour l'activer uniquement en local, dans `src/config/config.php` (fichier local non versionné), régler `app.environment` sur `development` et `payment.simulation_enabled` sur `true`. La valeur par défaut dans `config.example.php` reste désactivée. Ne jamais activer cette option en production.
+
+Le backend accepte alors une commande Mobile Money avec `payment_provider: "netikash_test"` sans numéro marchand. Après création de commande, appeler en POST `?action=simulate-payment` avec le jeton CSRF et le cookie de session, et le JSON `{"order_id": ID, "outcome": "success"}` ou `{"order_id": ID, "outcome": "failed"}`. Le endpoint vérifie que la commande appartient au client connecté, qu'elle est bien une commande de test en attente et qu'elle n'a pas déjà été traitée. Il enregistre un paiement de test et met à jour le statut. Il ne doit jamais être exposé/activé sur un serveur public.
+
+Cette première étape prépare et sécurise le moteur backend de simulation. Le raccordement du bouton dans l'interface de paiement reste une étape frontend distincte. La vraie connexion Netikash (OAuth, demande de paiement, webhook signé et vérification serveur) sera ajoutée plus tard avec les identifiants Sandbox officiels.
+
 ## Sécurité et limites
 Mots de passe hachés, requêtes PDO préparées, sessions renouvelées à la connexion, cookies HttpOnly/SameSite, contrôle CSRF et rôle admin côté serveur. Le stock est contrôlé et décrémenté dans une transaction. Les erreurs internes sont journalisées.
 Avant mise en production : HTTPS obligatoire, limitation des tentatives de connexion, journal d'audit, sauvegardes, tests automatisés, règles CORS strictes et intégration Mobile Money réelle.
