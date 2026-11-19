@@ -37,6 +37,9 @@ Remplacer par l'adresse exacte du compte à promouvoir.
 ## Paiements
 Les modes espèces (`cash`), Mobile Money (`mobile_money`) et crédit (`credit`) sont représentés. L'administration permet de configurer les numéros Airtel Money, M-Pesa et Orange Money. Le client voit le numéro actif, choisit l'opérateur et saisit sa référence ; la commande reste en attente jusqu'à vérification manuelle par l'administrateur. Cette version ne déclenche pas de transfert et ne vérifie pas automatiquement les paiements via Netikash. Pour le paiement automatique, obtenir les accès marchand/API et intégrer les endpoints et notifications du prestataire. Pour une base existante, exécuter une fois `database/migrations/2026_11_19_add_mobile_money_settings.sql`. Le crédit est refusé par défaut ; un administrateur peut autoriser un client habituel via `credit_eligible`. Les plafonds et échéances restent à définir avec la boutique.
 
+## Factures client
+Après validation, chaque commande conserve son statut habituel « En attente ». Le client peut ouvrir sa facture depuis la confirmation ou l’historique des commandes. Le bouton ouvre une page imprimable ; dans la boîte d’impression du navigateur, choisir « Enregistrer au format PDF ». L’API vérifie que la commande appartient au client connecté. Aucune migration SQL n’est nécessaire.
+
 ## Sécurité et limites
 Mots de passe hachés, requêtes PDO préparées, sessions renouvelées à la connexion, cookies HttpOnly/SameSite, contrôle CSRF et rôle admin côté serveur. Le stock est contrôlé et décrémenté dans une transaction. Les erreurs internes sont journalisées.
 Avant mise en production : HTTPS obligatoire, limitation des tentatives de connexion, journal d'audit, sauvegardes, tests automatisés, règles CORS strictes et intégration Mobile Money réelle.

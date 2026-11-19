@@ -160,3 +160,8 @@
 .product-add-cart:disabled{background:#e4e0d8;border-color:#e4e0d8;color:#8d8d89;cursor:not-allowed}
 .product-details-button{width:100%;min-height:38px;margin-top:9px;border:1px solid #d8d2c6;background:transparent;color:var(--navy);font-size:9px}
 .product-details-button:hover{border-color:var(--gold);color:var(--navy)}
+
+/* Boutons de facture dans l'espace client */
+.shop-order-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.shop-invoice-button{font-size:9px;padding:8px 10px;white-space:nowrap}
+@media(max-width:560px){.shop-order-actions{justify-content:flex-start;width:100%}.shop-invoice-button{width:100%}}
