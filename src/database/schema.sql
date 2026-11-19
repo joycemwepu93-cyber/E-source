@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS orders (
  order_number VARCHAR(32) NOT NULL UNIQUE,
  status ENUM('pending','confirmed','processing','shipped','completed','cancelled') NOT NULL DEFAULT 'pending',
  payment_method ENUM('cash','mobile_money','credit') NOT NULL,
+ payment_provider VARCHAR(32) NULL,payment_reference VARCHAR(120) NULL,
  payment_status ENUM('unpaid','pending','paid','partial','refunded') NOT NULL DEFAULT 'unpaid',
  total_amount DECIMAL(12,2) NOT NULL,currency CHAR(3) NOT NULL DEFAULT 'USD',customer_note TEXT NULL,
  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -66,3 +67,15 @@ CREATE TABLE IF NOT EXISTS payments (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT IGNORE INTO categories(name,slug) VALUES
 ('Hommes','hommes'),('Femmes','femmes'),('Enfants','enfants'),('Chaussures','chaussures'),('Accessoires','accessoires');
+
+
+CREATE TABLE IF NOT EXISTS payment_settings (
+ provider VARCHAR(32) NOT NULL PRIMARY KEY,label VARCHAR(60) NOT NULL,
+ phone_number VARCHAR(30) NOT NULL DEFAULT '',enabled TINYINT(1) NOT NULL DEFAULT 0,
+ instructions VARCHAR(500) NULL,
+ updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT IGNORE INTO payment_settings(provider,label,phone_number,enabled,instructions) VALUES
+('airtel_money','Airtel Money','',0,'Envoyez le montant exact puis indiquez la référence de transaction.'),
+('m_pesa','M-Pesa','',0,'Envoyez le montant exact puis indiquez la référence de transaction.'),
+('orange_money','Orange Money','',0,'Envoyez le montant exact puis indiquez la référence de transaction.');
